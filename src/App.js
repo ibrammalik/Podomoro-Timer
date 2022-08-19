@@ -2,15 +2,27 @@ import "./App.css";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(1500);
+  const defaultRemainingTime = 1500;
+  const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
   const [active, setActive] = useState(false);
 
   const timer = () => {
-    setCount((prevCount) => prevCount - 1);
+    setRemainingTime((prevCount) => prevCount - 1);
   };
 
   const toggleActive = () => {
-    active ? setActive(false) : setActive(true);
+    if (active) {
+      setActive(false);
+      document.getElementById("mainButton").innerHTML = "START!";
+    } else {
+      setActive(true);
+      document.getElementById("mainButton").innerHTML = "STOP!";
+    }
+  };
+
+  const resetTimer = () => {
+    document.getElementById("mainButton").click();
+    setRemainingTime(defaultRemainingTime);
   };
 
   useEffect(() => {
@@ -26,8 +38,13 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>Timer</p>
-        <p>{count}</p>
-        <button onClick={toggleActive}>START!</button>
+        <p>{remainingTime}</p>
+        <button onClick={toggleActive} id="mainButton">
+          START!
+        </button>
+        <button onClick={resetTimer} id="resetButton">
+          RESET!
+        </button>
       </header>
     </div>
   );
