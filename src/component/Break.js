@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const Break = () => {
-  let defaultRemainingTime = 300000;
+  let defaultRemainingTime = 5000;
   const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
   const [active, setActive] = useState(false);
 
@@ -36,6 +36,13 @@ const Break = () => {
       return () => clearTimeout(intervalTimer);
     } else return;
   }, [active]);
+
+  useEffect(() => {
+    if (remainingTime === 0) {
+      setActive(false);
+      document.getElementById("audioAlarm").play();
+    }
+  }, [remainingTime]);
 
   let minutes = () => {
     if (Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60)) < 10) {

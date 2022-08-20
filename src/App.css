@@ -20,3 +20,7 @@
   align-items: center;
   gap: 1em;
 }
+
+.Audio-alarm {
+  display: none;
+}

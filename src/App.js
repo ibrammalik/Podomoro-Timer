@@ -1,5 +1,6 @@
 import "./App.css";
 import Break from "./component/Break";
+import ExtendedBreakTimer from "./component/ExtendedBreakTimer";
 import Timer from "./component/Timer";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
         <div className="Timer-container">
           <Timer />
           <Break />
+          <ExtendedBreakTimer />
         </div>
       </header>
     </div>

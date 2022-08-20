@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import Alarm from "../asset/sounds/Alarm.mp3";
 
-const Timer = () => {
-  let defaultRemainingTime = 5000;
+const ExtendedBreakTimer = () => {
+  let defaultRemainingTime = 1500000;
   const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
   const [active, setActive] = useState(false);
 
@@ -13,16 +12,16 @@ const Timer = () => {
   const toggleActive = () => {
     if (active) {
       setActive(false);
-      document.getElementById("mainButton").innerHTML = "START!";
+      document.getElementById("mainButtonExtended").innerHTML = "START!";
     } else {
       setActive(true);
-      document.getElementById("mainButton").innerHTML = "STOP!";
+      document.getElementById("mainButtonExtended").innerHTML = "STOP!";
     }
   };
 
   const resetTimer = () => {
     if (active) {
-      document.getElementById("mainButton").click();
+      document.getElementById("mainButtonExtended").click();
       setRemainingTime(defaultRemainingTime);
     } else {
       setRemainingTime(defaultRemainingTime);
@@ -37,13 +36,6 @@ const Timer = () => {
       return () => clearTimeout(intervalTimer);
     } else return;
   }, [active]);
-
-  useEffect(() => {
-    if (remainingTime === 0) {
-      document.getElementById("mainButton").click();
-      document.getElementById("audioAlarm").play();
-    }
-  }, [remainingTime]);
 
   let minutes = () => {
     if (Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60)) < 10) {
@@ -66,15 +58,14 @@ const Timer = () => {
       <p>
         {minutes()} : {seconds()}
       </p>
-      <button onClick={toggleActive} id="mainButton">
+      <button onClick={toggleActive} id="mainButtonExtended">
         START!
       </button>
-      <button onClick={resetTimer} id="resetButton">
+      <button onClick={resetTimer} id="resetButtonExtended">
         RESET!
       </button>
-      <audio src={Alarm} controls className="Audio-alarm" id="audioAlarm" />
     </div>
   );
 };
 
-export default Timer;
+export default ExtendedBreakTimer;
