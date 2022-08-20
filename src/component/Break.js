@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-const Timer = () => {
-  let defaultRemainingTime = 1500000;
+const Break = () => {
+  let defaultRemainingTime = 300000;
   const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
   const [active, setActive] = useState(false);
 
@@ -12,16 +12,16 @@ const Timer = () => {
   const toggleActive = () => {
     if (active) {
       setActive(false);
-      document.getElementById("mainButton").innerHTML = "START!";
+      document.getElementById("mainButtonBreak").innerHTML = "START!";
     } else {
       setActive(true);
-      document.getElementById("mainButton").innerHTML = "STOP!";
+      document.getElementById("mainButtonBreak").innerHTML = "STOP!";
     }
   };
 
   const resetTimer = () => {
     if (active) {
-      document.getElementById("mainButton").click();
+      document.getElementById("mainButtonBreak").click();
       setRemainingTime(defaultRemainingTime);
     } else {
       setRemainingTime(defaultRemainingTime);
@@ -54,18 +54,18 @@ const Timer = () => {
 
   return (
     <div>
-      <h3>Focus Time</h3>
+      <h3>Break Time</h3>
       <p>
         {minutes()} : {seconds()}
       </p>
-      <button onClick={toggleActive} id="mainButton">
+      <button onClick={toggleActive} id="mainButtonBreak">
         START!
       </button>
-      <button onClick={resetTimer} id="resetButton">
+      <button onClick={resetTimer} id="resetButtonBreak">
         RESET!
       </button>
     </div>
   );
 };
 
-export default Timer;
+export default Break;
