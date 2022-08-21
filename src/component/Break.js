@@ -60,7 +60,7 @@ const Break = () => {
   };
 
   return (
-    <div>
+    <div className="Non-active" id="Break">
       <h3>Break Time</h3>
       <p>
         {minutes()} : {seconds()}

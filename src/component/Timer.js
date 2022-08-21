@@ -27,6 +27,8 @@ const Timer = () => {
     } else {
       setRemainingTime(defaultRemainingTime);
     }
+    document.getElementById("audioAlarm").pause();
+    document.getElementById("audioAlarm").currentTime = 0;
   };
 
   useEffect(() => {
@@ -61,7 +63,7 @@ const Timer = () => {
   };
 
   return (
-    <div>
+    <div id="timer">
       <h3>Focus Time</h3>
       <p>
         {minutes()} : {seconds()}
@@ -72,7 +74,7 @@ const Timer = () => {
       <button onClick={resetTimer} id="resetButton">
         RESET!
       </button>
-      <audio src={Alarm} controls className="Audio-alarm" id="audioAlarm" />
+      <audio src={Alarm} controls className="Non-active" id="audioAlarm" />
     </div>
   );
 };

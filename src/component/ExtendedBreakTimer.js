@@ -53,7 +53,7 @@ const ExtendedBreakTimer = () => {
   };
 
   return (
-    <div>
+    <div className="Non-active" id="longBreak">
       <h3>Focus Time</h3>
       <p>
         {minutes()} : {seconds()}
