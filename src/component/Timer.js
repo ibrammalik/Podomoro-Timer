@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import Alarm from "../asset/sounds/Alarm.mp3";
 
 const Timer = () => {
-  let defaultRemainingTime = 5000;
-  const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
+  let defaultPodomoroTime = 1500000;
+  let defaultBreakTime = 300000;
+  let defaultLongBreakTime = 900000;
+  const [remainingTime, setRemainingTime] = useState(defaultPodomoroTime);
   const [active, setActive] = useState(false);
 
   const timer = () => {
@@ -23,9 +25,9 @@ const Timer = () => {
   const resetTimer = () => {
     if (active) {
       document.getElementById("mainButton").click();
-      setRemainingTime(defaultRemainingTime);
+      setRemainingTime(defaultPodomoroTime);
     } else {
-      setRemainingTime(defaultRemainingTime);
+      setRemainingTime(defaultPodomoroTime);
     }
     document.getElementById("audioAlarm").pause();
     document.getElementById("audioAlarm").currentTime = 0;
@@ -62,8 +64,19 @@ const Timer = () => {
     }
   };
 
+  const setPodomoro = () => setRemainingTime(defaultPodomoroTime);
+
+  const setBreak = () => setRemainingTime(defaultBreakTime);
+
+  const setLongBreak = () => setRemainingTime(defaultLongBreakTime);
+
   return (
     <div id="timer">
+      <div>
+        <button onClick={setPodomoro}>Podomoro</button>
+        <button onClick={setBreak}>Break</button>
+        <button onClick={setLongBreak}>Long Break</button>
+      </div>
       <h3>Focus Time</h3>
       <p>
         {minutes()} : {seconds()}
