@@ -46,7 +46,7 @@ const Timer = () => {
     if (remainingTime === 0) {
       document.getElementById("mainButton").click();
       document.getElementById("audioAlarm").play();
-    }
+    } else if (remainingTime < 1000) setRemainingTime(0);
   }, [remainingTime]);
 
   let minutes = () => {
