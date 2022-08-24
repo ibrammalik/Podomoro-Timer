@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import Alarm from "../asset/sounds/Alarm.mp3";
 
-const Timer = () => {
-  let defaultPodomoroTime = 1500000;
-  let defaultBreakTime = 300000;
-  let defaultLongBreakTime = 900000;
-  const [remainingTime, setRemainingTime] = useState(defaultPodomoroTime);
+const Timer = (props) => {
+  const { podomorotime, breaktime, longbreaktime } = props;
+  let podomoroTime = Number(podomorotime) * 60000;
+  let defaultBreakTime = Number(breaktime) * 60000;
+  let defaultLongBreakTime = Number(longbreaktime) * 60000;
+  const [remainingTime, setRemainingTime] = useState(podomoroTime);
   const [active, setActive] = useState(false);
 
   const timer = () => {
@@ -25,9 +26,9 @@ const Timer = () => {
   const resetTimer = () => {
     if (active) {
       document.getElementById("mainButton").click();
-      setRemainingTime(defaultPodomoroTime);
+      setRemainingTime(podomoroTime);
     } else {
-      setRemainingTime(defaultPodomoroTime);
+      setRemainingTime(podomoroTime);
     }
     document.getElementById("audioAlarm").pause();
     document.getElementById("audioAlarm").currentTime = 0;
@@ -49,6 +50,10 @@ const Timer = () => {
     } else if (remainingTime < 1000) setRemainingTime(0);
   }, [remainingTime]);
 
+  useEffect(() => {
+    setRemainingTime(podomoroTime);
+  }, [podomoroTime]);
+
   let minutes = () => {
     if (Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60)) < 10) {
       return `0${Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60))}`;
@@ -64,7 +69,7 @@ const Timer = () => {
     }
   };
 
-  const setPodomoro = () => setRemainingTime(defaultPodomoroTime);
+  const setPodomoro = () => setRemainingTime(podomoroTime);
 
   const setBreak = () => setRemainingTime(defaultBreakTime);
 
