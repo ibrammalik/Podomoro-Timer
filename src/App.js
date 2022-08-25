@@ -20,7 +20,6 @@ function App() {
 
   const [inputTodo, setInputTodo] = React.useState("");
   const [todos, setTodos] = React.useState([]);
-  const [deleteTodo, setDeleteTodo] = React.useState("");
 
   const saveInput = () => {
     setModalShow(false);
@@ -64,7 +63,7 @@ function App() {
         <h1>Timer</h1>
         <Timer podomorotime={podomoroTime} breaktime={breakTime} longbreaktime={longBreakTime} />
       </header>
-      <Tasks inputTodo={inputTodo} setInputTodo={setInputTodo} todos={todos} setTodos={setTodos} deletetodo={deleteTodo} setDeleteTodo={setDeleteTodo} />
+      <Tasks inputTodo={inputTodo} setInputTodo={setInputTodo} todos={todos} setTodos={setTodos} />
     </div>
   );
 }

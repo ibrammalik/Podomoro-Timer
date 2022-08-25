@@ -3,9 +3,7 @@ import { nanoid } from "nanoid";
 import React from "react";
 
 const Tasks = (props) => {
-  const { inputTodo, setInputTodo, todos, setTodos, deleteTodo, setDeleteTodo } = props;
-
-  const [disabled, setDisabled] = React.useState(true);
+  const { inputTodo, setInputTodo, todos, setTodos } = props;
 
   const inputTodoHandler = (event) => setInputTodo(event.target.value);
 
@@ -17,8 +15,28 @@ const Tasks = (props) => {
 
   const editToggle = (event) => {
     const selectedId = event.target.attributes.value.value;
+    const selectedInputTodo = document.getElementById(selectedId);
+    selectedInputTodo.disabled = !selectedInputTodo.disabled;
+    selectedInputTodo.focus();
 
-    setDisabled((prevDisabled) => !prevDisabled);
+    //make todo sibling save button appear with changing display style
+    const saveButton = selectedInputTodo.parentElement.lastChild.firstChild;
+    saveButton.style.display = "block";
+  };
+
+  const saveHandler = (event) => {
+    const selectedId = event.target.attributes.value.value;
+    const selectedInputTodo = document.getElementById(selectedId);
+    const saveButton = selectedInputTodo.parentElement.lastChild.firstChild;
+
+    for (let i = 0; i < todos.length; i++) {
+      if (todos[i].id === selectedId) {
+        [...todos][i].task = selectedInputTodo.value;
+        //make todo sibling save button disappear with changing display style
+        saveButton.style.display = "none";
+        selectedInputTodo.disabled = !selectedInputTodo.disabled;
+      }
+    }
   };
 
   const deleteHandler = (event) => {
@@ -35,8 +53,11 @@ const Tasks = (props) => {
 
   const todosList = todos.map((todo) => (
     <li key={todo.id} className="list-group-item d-flex justify-content-between align-items center">
-      <input defaultValue={todo.task} type="text" style={{ border: "none" }} disabled={disabled} />
+      <input defaultValue={todo.task} type="text" style={{ border: "none" }} disabled={true} id={todo.id} />
       <ButtonGroup>
+        <Button className="btn-sm btn-success" onClick={saveHandler} value={todo.id} style={{ display: "none" }}>
+          <i className="bi bi-file-arrow-up" value={todo.id}></i> Save
+        </Button>
         <Button className="btn-sm" onClick={editToggle} value={todo.id}>
           <i className="bi bi-pencil" value={todo.id}></i>
         </Button>
