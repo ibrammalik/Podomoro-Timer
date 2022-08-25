@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 const Settings = (props) => {
-  const { podomorovalue, breakvalue, longbreakvalue, handlechangepodomoro, handlechangebreak, handlechangelongbreak, onHide, show } = props;
+  const { podomorovalue, breakvalue, longbreakvalue, handlechangepodomoro, handlechangebreak, handlechangelongbreak, onHide, show, onSave, reset } = props;
   return (
     <Modal show={show} onHide={onHide} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header closeButton>
@@ -21,9 +21,8 @@ const Settings = (props) => {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={onHide}>Reset</Button>
-        <Button onClick={onHide}>Save</Button>
-        <Button onClick={onHide}>Close</Button>
+        <Button onClick={reset}>Reset</Button>
+        <Button onClick={onSave}>Save</Button>
       </Modal.Footer>
     </Modal>
   );
