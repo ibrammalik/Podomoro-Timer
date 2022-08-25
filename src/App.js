@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import Timer from "./component/Timer";
 import NavbarComponent from "./component/NavbarComponent";
 import Settings from "./component/Settings";
@@ -19,6 +20,7 @@ function App() {
 
   const [inputTodo, setInputTodo] = React.useState("");
   const [todos, setTodos] = React.useState([]);
+  const [deleteTodo, setDeleteTodo] = React.useState("");
 
   const saveInput = () => {
     setModalShow(false);
@@ -62,7 +64,7 @@ function App() {
         <h1>Timer</h1>
         <Timer podomorotime={podomoroTime} breaktime={breakTime} longbreaktime={longBreakTime} />
       </header>
-      <Tasks inputTodo={inputTodo} setInputTodo={setInputTodo} todos={todos} setTodos={setTodos} />
+      <Tasks inputTodo={inputTodo} setInputTodo={setInputTodo} todos={todos} setTodos={setTodos} deletetodo={deleteTodo} setDeleteTodo={setDeleteTodo} />
     </div>
   );
 }
