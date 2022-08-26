@@ -1,9 +1,9 @@
-import { Button, ButtonGroup, CloseButton, Form } from "react-bootstrap";
+import { Button, ButtonGroup, Form } from "react-bootstrap";
 import { nanoid } from "nanoid";
-import React from "react";
+import React, { useEffect } from "react";
 
 const Tasks = (props) => {
-  const { inputTodo, setInputTodo, todos, setTodos } = props;
+  const { inputTodo, setInputTodo, todos, setTodos, tasksActive, setTasksActive } = props;
 
   const inputTodoHandler = (event) => setInputTodo(event.target.value);
 
@@ -51,9 +51,18 @@ const Tasks = (props) => {
     }
   };
 
+  const closeHandler = () => {
+    setTasksActive((prevValue) => !prevValue);
+  };
+
+  useEffect(() => {
+    const tasksComponent = document.getElementById("tasks");
+    tasksComponent.classList.toggle("Tasks-active");
+  }, [tasksActive]);
+
   const todosList = todos.map((todo) => (
     <li key={todo.id} className="list-group-item d-flex justify-content-between align-items center">
-      <input defaultValue={todo.task} type="text" style={{ border: "none", backgroundColor: "transparent" }} disabled={true} id={todo.id} className="Disabled-input" />
+      <input defaultValue={todo.task} type="text" style={{ border: "none", backgroundColor: "transparent", maxWidth: "175px" }} disabled={true} id={todo.id} className="Disabled-input" />
       <ButtonGroup>
         <Button className="btn-sm btn-success" onClick={saveHandler} value={todo.id} style={{ display: "none" }}>
           <i className="bi bi-file-arrow-up" value={todo.id}></i> Save
@@ -69,11 +78,15 @@ const Tasks = (props) => {
   ));
 
   return (
-    <div className="position-fixed mt-3 bg-secondary start-0 p-2 " style={{ height: "88vh", width: "300px", top: "50px" }}>
+    <div className="position-fixed mt-3 bg-secondary p-2 rounded" id="tasks">
       <div className="d-flex justify-content-between align-items-center mb-3" style={{ width: "auto" }}>
-        <Button>Reset</Button>
+        <Button>
+          <i className="bi bi-trash"></i>
+        </Button>
         <div>Tasks</div>
-        <CloseButton></CloseButton>
+        <Button onClick={closeHandler}>
+          <i className="bi bi-x-square"></i>
+        </Button>
       </div>
       <Form className="input-group mb-3">
         <input type="text" className="form-control " placeholder="Task" aria-label="Task" aria-describedby="button-addon2" onChange={inputTodoHandler} value={inputTodo} />
@@ -81,8 +94,8 @@ const Tasks = (props) => {
           <i className="bi bi-plus-square"></i>
         </Button>
       </Form>
-      <div className="overflow-auto" style={{ height: "69vh" }}>
-        <ul className="list-group list-group-flush">{todosList}</ul>
+      <div className="overflow-auto rounded" style={{ height: "69vh" }}>
+        <ul className="list-group list-group-flush rounded">{todosList}</ul>
       </div>
     </div>
   );

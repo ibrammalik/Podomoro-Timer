@@ -18,6 +18,8 @@ function App() {
   const [breakTime, setBreakTime] = React.useState(5);
   const [longBreakTime, setLongBreakTime] = React.useState(15);
 
+  const [tasksActive, setTasksActive] = React.useState(false);
+
   const [inputTodo, setInputTodo] = React.useState("");
   const [todos, setTodos] = React.useState([]);
 
@@ -46,7 +48,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavbarComponent handleClick={() => setModalShow(true)} />
+      <NavbarComponent handleClick={() => setModalShow(true)} setTasksActive={setTasksActive} />
       <Settings
         show={modalShow}
         onHide={onHide}
@@ -63,7 +65,7 @@ function App() {
         <h1>Timer</h1>
         <Timer podomorotime={podomoroTime} breaktime={breakTime} longbreaktime={longBreakTime} />
       </header>
-      <Tasks inputTodo={inputTodo} setInputTodo={setInputTodo} todos={todos} setTodos={setTodos} />
+      <Tasks inputTodo={inputTodo} setInputTodo={setInputTodo} todos={todos} setTodos={setTodos} tasksActive={tasksActive} setTasksActive={setTasksActive} />
     </div>
   );
 }

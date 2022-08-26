@@ -29,3 +29,10 @@
   background-color: transparent;
   color: black;
 }
+
+.Tasks-active {
+  left: 0;
+  top: 50px;
+  height: 88vh;
+  width: 350px;
+}
