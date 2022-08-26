@@ -5,7 +5,7 @@ import logo from "../asset/images/logo.svg";
 
 const NavbarComponent = (props) => {
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="dark" variant="dark" className="position-fixed top-0 left-0" style={{ width: "100%" }}>
       <Container>
         <Navbar.Brand href="#home">
           <img alt="" src={logo} width="30" height="30" className="d-inline-block align-top" /> React Bootstrap

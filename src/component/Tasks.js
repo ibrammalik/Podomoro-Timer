@@ -53,7 +53,7 @@ const Tasks = (props) => {
 
   const todosList = todos.map((todo) => (
     <li key={todo.id} className="list-group-item d-flex justify-content-between align-items center">
-      <input defaultValue={todo.task} type="text" style={{ border: "none" }} disabled={true} id={todo.id} />
+      <input defaultValue={todo.task} type="text" style={{ border: "none", backgroundColor: "transparent" }} disabled={true} id={todo.id} className="Disabled-input" />
       <ButtonGroup>
         <Button className="btn-sm btn-success" onClick={saveHandler} value={todo.id} style={{ display: "none" }}>
           <i className="bi bi-file-arrow-up" value={todo.id}></i> Save
@@ -69,19 +69,19 @@ const Tasks = (props) => {
   ));
 
   return (
-    <div className=" container mt-3 bg-secondary" style={{ height: "100vh" }}>
-      <div className="d-flex justify-content-between align-items center " style={{ width: "100%" }}>
+    <div className="position-fixed mt-3 bg-secondary start-0 p-2 " style={{ height: "88vh", width: "300px", top: "50px" }}>
+      <div className="d-flex justify-content-between align-items-center mb-3" style={{ width: "auto" }}>
         <Button>Reset</Button>
         <div>Tasks</div>
         <CloseButton></CloseButton>
       </div>
       <Form className="input-group mb-3">
-        <input type="text" className="form-control" placeholder="Task" aria-label="Task" aria-describedby="button-addon2" onChange={inputTodoHandler} value={inputTodo} />
+        <input type="text" className="form-control " placeholder="Task" aria-label="Task" aria-describedby="button-addon2" onChange={inputTodoHandler} value={inputTodo} />
         <Button className="btn btn-outline-secondary text-white" type="submit" id="button-addon2" onClick={submitHandler}>
           <i className="bi bi-plus-square"></i>
         </Button>
       </Form>
-      <div>
+      <div className="overflow-auto" style={{ height: "69vh" }}>
         <ul className="list-group list-group-flush">{todosList}</ul>
       </div>
     </div>

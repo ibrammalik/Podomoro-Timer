@@ -24,3 +24,8 @@
 .Non-active {
   display: none;
 }
+
+.Disabled-input:disabled {
+  background-color: transparent;
+  color: black;
+}
