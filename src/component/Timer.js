@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import Alarm from "../asset/sounds/Alarm.mp3";
 
 const Timer = (props) => {
@@ -77,21 +78,26 @@ const Timer = (props) => {
 
   return (
     <div id="timer">
-      <div>
-        <button onClick={setPodomoro}>Podomoro</button>
-        <button onClick={setBreak}>Break</button>
-        <button onClick={setLongBreak}>Long Break</button>
+      <div className="mt-3 mb-5">
+        <Button onClick={setPodomoro} className="mx-2">
+          Podomoro
+        </Button>
+        <Button onClick={setBreak} className="mx-2">
+          Break
+        </Button>
+        <Button onClick={setLongBreak} className="mx-2">
+          Long Break
+        </Button>
       </div>
-      <h3>Focus Time</h3>
-      <p>
+      <h1 className="my-5">
         {minutes()} : {seconds()}
-      </p>
-      <button onClick={toggleActive} id="mainButton">
+      </h1>
+      <Button onClick={toggleActive} id="mainButton" className="mx-2">
         START!
-      </button>
-      <button onClick={resetTimer} id="resetButton">
-        RESET!
-      </button>
+      </Button>
+      <Button onClick={resetTimer} id="resetButton" className="mx-2">
+        <i class="bi bi-arrow-counterclockwise"></i>
+      </Button>
       <audio src={Alarm} controls className="Non-active" id="audioAlarm" />
     </div>
   );
