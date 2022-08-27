@@ -62,7 +62,6 @@ function App() {
         handlechangelongbreak={(event) => setTemporaryLongBreak(event.target.value)}
       />
       <header className="App-header">
-        <h1 className="mb-3">Timer</h1>
         <Timer podomorotime={podomoroTime} breaktime={breakTime} longbreaktime={longBreakTime} />
       </header>
       <Tasks inputTodo={inputTodo} setInputTodo={setInputTodo} todos={todos} setTodos={setTodos} tasksActive={tasksActive} setTasksActive={setTasksActive} />

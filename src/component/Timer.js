@@ -4,11 +4,17 @@ import Alarm from "../asset/sounds/Alarm.mp3";
 
 const Timer = (props) => {
   const { podomorotime, breaktime, longbreaktime } = props;
+
   let podomoroTime = Number(podomorotime) * 60000;
   let defaultBreakTime = Number(breaktime) * 60000;
   let defaultLongBreakTime = Number(longbreaktime) * 60000;
+
   const [remainingTime, setRemainingTime] = useState(podomoroTime);
   const [active, setActive] = useState(false);
+  const [activeTimer, setActiveTimer] = useState();
+  const podomoroButton = document.getElementById("podomoroButton");
+  const breakButton = document.getElementById("breakButton");
+  const longBreakButton = document.getElementById("longBreakButton");
 
   const timer = () => {
     setRemainingTime((prevCount) => prevCount - 1000);
@@ -27,12 +33,27 @@ const Timer = (props) => {
   const resetTimer = () => {
     if (active) {
       document.getElementById("mainButton").click();
-      setRemainingTime(podomoroTime);
+      setRemainingTime(activeTimer);
     } else {
-      setRemainingTime(podomoroTime);
+      setRemainingTime(activeTimer);
     }
     document.getElementById("audioAlarm").pause();
     document.getElementById("audioAlarm").currentTime = 0;
+  };
+
+  const setPodomoro = () => {
+    setRemainingTime(podomoroTime);
+    setActiveTimer(podomoroTime);
+  };
+
+  const setBreak = () => {
+    setRemainingTime(defaultBreakTime);
+    setActiveTimer(defaultBreakTime);
+  };
+
+  const setLongBreak = () => {
+    setRemainingTime(defaultLongBreakTime);
+    setActiveTimer(defaultLongBreakTime);
   };
 
   useEffect(() => {
@@ -70,22 +91,16 @@ const Timer = (props) => {
     }
   };
 
-  const setPodomoro = () => setRemainingTime(podomoroTime);
-
-  const setBreak = () => setRemainingTime(defaultBreakTime);
-
-  const setLongBreak = () => setRemainingTime(defaultLongBreakTime);
-
   return (
     <div id="timer">
       <div className="mt-3 mb-5">
-        <Button onClick={setPodomoro} className="mx-2">
+        <Button onClick={setPodomoro} className="mx-2" id="podomoroButton">
           Podomoro
         </Button>
-        <Button onClick={setBreak} className="mx-2">
+        <Button onClick={setBreak} className="mx-2" id="breakButton">
           Break
         </Button>
-        <Button onClick={setLongBreak} className="mx-2">
+        <Button onClick={setLongBreak} className="mx-2" id="longBreakButton">
           Long Break
         </Button>
       </div>
@@ -96,7 +111,7 @@ const Timer = (props) => {
         START!
       </Button>
       <Button onClick={resetTimer} id="resetButton" className="mx-2">
-        <i class="bi bi-arrow-counterclockwise"></i>
+        <i className="bi bi-arrow-counterclockwise"></i>
       </Button>
       <audio src={Alarm} controls className="Non-active" id="audioAlarm" />
     </div>

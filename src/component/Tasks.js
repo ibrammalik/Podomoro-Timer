@@ -55,6 +55,10 @@ const Tasks = (props) => {
     setTasksActive((prevValue) => !prevValue);
   };
 
+  const clearTasks = () => {
+    setTodos([]);
+  };
+
   useEffect(() => {
     const tasksComponent = document.getElementById("tasks");
     tasksComponent.classList.toggle("Tasks-active");
@@ -80,10 +84,10 @@ const Tasks = (props) => {
   return (
     <div className="position-fixed mt-3 bg-secondary p-2 rounded" id="tasks">
       <div className="d-flex justify-content-between align-items-center mb-3" style={{ width: "auto" }}>
-        <Button>
+        <Button onClick={clearTasks}>
           <i className="bi bi-trash"></i>
         </Button>
-        <div>Tasks</div>
+        <div className="text-white">Tasks</div>
         <Button onClick={closeHandler}>
           <i className="bi bi-x-square"></i>
         </Button>
